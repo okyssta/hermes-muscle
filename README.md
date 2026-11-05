@@ -101,9 +101,9 @@ bearer token present in the index: False
 connection password present in the index: False
 ```
 
-A 20,000-command history (1.0 MB) parses and indexes in **1.72 s** (11,651
-records/s), producing a 9.68 MiB index; a warm rescan takes 0.83 s and a search
-over the whole index takes 8.4 ms. Reproduce with `python scripts/benchmark.py`.
+A 20,000-command history (1.0 MB) parses and indexes in **1.7–1.8 s** (≈11,000
+records/s), producing a 9.7 MiB index; a warm rescan takes 0.81 s and a search
+over the whole index takes 8–11 ms. Reproduce with `python scripts/benchmark.py`.
 
 ## Why this is not a skill
 
