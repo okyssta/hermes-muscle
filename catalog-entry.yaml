@@ -1,0 +1,30 @@
+name: muscle
+repo: https://github.com/okyssta/hermes-muscle
+# sha is filled in at release time with the immutable 40-character commit SHA of
+# the tagged release; the catalog installs exactly that commit.
+# sha: 0000000000000000000000000000000000000000  # pending
+description: >-
+  A local memory of the commands the user has actually typed: indexes bash, zsh
+  and fish history plus aliases and shell functions into SQLite/FTS5, and gives
+  the agent five tools to recall an exact command, see the commands around it, or
+  summarize the user's shell habits. Secrets are redacted before storage and
+  /muscle forget deletes the index. Disclosure — reads the shell history and rc
+  files listed in its config (read-only), writes one SQLite index under the
+  profile's plugin-data directory, makes no network calls, runs no subprocesses.
+maintainer: okyssta
+tier: community
+category: tools
+requires_hermes: ">=0.22.0"
+version: "1.0.0"
+docs_url: https://github.com/okyssta/hermes-muscle#readme
+platforms: []
+capabilities:
+  provides_tools:
+    - shell_recall
+    - shell_show
+    - shell_last
+    - shell_habits
+    - shell_index
+  provides_hooks: []
+  provides_middleware: []
+  requires_env: []

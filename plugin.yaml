@@ -1,0 +1,82 @@
+name: muscle
+label: Muscle
+version: 1.0.0
+manifest_version: 2
+api_version: 1
+license: MIT
+homepage: https://github.com/okyssta/hermes-muscle
+author: kyssta
+requires_hermes: ">=0.22.0"
+title: Muscle — your agent knows your shell
+description: >
+  Hermes gets a memory of the commands you have actually typed. Muscle indexes the
+  shell history files and rc files already on the machine — bash, zsh and fish
+  formats, aliases and shell functions — into a local SQLite/FTS5 index, then
+  gives the agent five tools to search it. Ask "what was that ffmpeg command I
+  used to strip audio?", "how did I deploy the blog last time?", "what did I just
+  run?" and Hermes answers with your exact command, when you ran it, the directory
+  it ran in and how often it worked. Secrets (keys, bearer tokens, passwords,
+  connection strings, private keys) are redacted before storage, the history files
+  are only ever read, and /muscle forget deletes the index. No network calls, no
+  capture daemon and no shell wrapper: it uses the history your shell already
+  writes.
+  Disclosure — reads the shell history files and rc files listed in its config,
+  writes one SQLite index under the profile's plugin-data directory, makes no
+  network calls, runs no subprocesses, and redacts credential-shaped strings
+  before storing them.
+tags: [memory, shell, history, terminal, local, search, privacy, productivity]
+
+provides_tools:
+  - shell_recall
+  - shell_show
+  - shell_last
+  - shell_habits
+  - shell_index
+
+config_schema:
+  enabled:
+    type: bool
+    default: true
+    label: Enabled
+    description: Index the shell history and answer lookups
+  history_files:
+    type: list
+    default: []
+    label: History files
+    description: >-
+      History files to index, in addition to auto-detection. Leave empty to use the
+      usual paths (~/.zsh_history, ~/.bash_history, fish history, $HISTFILE)
+  include_aliases:
+    type: bool
+    default: true
+    label: Index aliases
+    description: Read alias definitions from ~/.bashrc, ~/.zshrc and fish config
+  include_functions:
+    type: bool
+    default: true
+    label: Index shell functions
+    description: Read shell function bodies from the same rc files
+  auto_index:
+    type: bool
+    default: true
+    label: Index automatically
+    description: Build the index in the background at startup and refresh it on first use
+  max_commands:
+    type: int
+    default: 50000
+    label: Max records
+    description: Keep at most this many records, oldest dropped first (100-500000)
+  redact:
+    type: bool
+    default: true
+    label: Redact secrets
+    description: >-
+      Mask API keys, bearer tokens, passwords, connection-string credentials and
+      private keys before anything is written to the index
+  min_command_chars:
+    type: int
+    default: 4
+    label: Minimum command length
+    description: Ignore history entries shorter than this (1-40)
+
+requires_env: []
