@@ -2,7 +2,7 @@ name: muscle
 repo: https://github.com/okyssta/hermes-muscle
 # sha is filled in at release time with the immutable 40-character commit SHA of
 # the tagged release; the catalog installs exactly that commit.
-sha: eae1839cab2cb07e47bb98ffa1a3d604c09de1b0
+sha: 551c657371fb472263903b6609dd8e1b9c6b514a
 description: >-
   A local memory of the commands the user has actually typed: indexes bash, zsh
   and fish history plus aliases and shell functions into SQLite/FTS5, and gives
